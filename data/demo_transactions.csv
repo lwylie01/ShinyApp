@@ -1,0 +1,52 @@
+transaction_id,date,envelope_id,amount,note
+t001,2026-09-01,rent,1400.00,September rent
+t002,2026-09-02,groceries,128.43,Weekly groceries
+t003,2026-09-04,gas,46.10,Fill-up
+t004,2026-09-06,dining,32.50,Pizza night
+t005,2026-09-09,groceries,117.86,Weekly groceries
+t006,2026-09-11,fun,24.00,Movie tickets
+t007,2026-09-12,car_repair,68.50,Oil change
+t008,2026-09-14,groceries,22.15,Milk and bread
+t009,2026-09-15,gas,44.80,Fill-up
+t010,2026-09-16,groceries,131.02,Weekly groceries
+t011,2026-09-18,utilities,112.40,Electric bill
+t012,2026-09-19,dining,41.75,Dinner with friends
+t013,2026-09-20,phone,65.00,Phone bill
+t014,2026-09-22,utilities,48.75,Water bill
+t015,2026-09-23,groceries,124.67,Weekly groceries
+t016,2026-09-25,fun,18.50,Bowling
+t017,2026-09-26,gas,39.95,Fill-up
+t018,2026-09-27,dining,28.20,Takeout
+t019,2026-09-30,groceries,61.20,Midweek top-up
+t020,2026-10-01,rent,1400.00,October rent
+t021,2026-10-02,groceries,134.21,Weekly groceries
+t022,2026-10-03,dining,36.40,Brunch
+t023,2026-10-05,gas,47.25,Fill-up
+t024,2026-10-07,trip,350.00,Rental house deposit
+t025,2026-10-09,groceries,119.54,Weekly groceries
+t026,2026-10-10,dining,52.80,Birthday dinner
+t027,2026-10-12,groceries,-18.99,Refund for returned item
+t028,2026-10-14,fun,30.00,Concert tickets
+t029,2026-10-15,dining,27.15,Takeout
+t030,2026-10-16,groceries,127.90,Weekly groceries
+t031,2026-10-18,utilities,104.85,Electric bill
+t032,2026-10-19,gas,43.60,Fill-up
+t033,2026-10-20,phone,65.00,Phone bill
+t034,2026-10-22,utilities,48.75,Water bill
+t035,2026-10-23,groceries,121.33,Weekly groceries
+t036,2026-10-24,dining,44.90,Dinner with friends
+t037,2026-10-26,fun,15.75,Board game
+t038,2026-10-28,gas,41.30,Fill-up
+t039,2026-10-30,groceries,58.12,Party snacks
+t040,2026-10-31,dining,38.60,Halloween takeout
+t041,2026-11-01,rent,1400.00,November rent
+t042,2026-11-02,groceries,129.75,Weekly groceries
+t043,2026-11-04,gas,45.90,Fill-up
+t044,2026-11-06,dining,31.25,Pizza night
+t045,2026-11-08,groceries,116.48,Weekly groceries
+t046,2026-11-10,fun,22.00,Museum tickets
+t047,2026-11-13,gas,42.70,Fill-up
+t048,2026-11-15,groceries,133.06,Weekly groceries
+t049,2026-11-17,dining,29.80,Takeout
+t050,2026-11-18,utilities,118.20,Electric bill
+t051,2026-11-20,phone,65.00,Phone bill

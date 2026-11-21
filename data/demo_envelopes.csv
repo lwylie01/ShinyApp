@@ -1,0 +1,10 @@
+envelope_id,name,type,monthly_amount,half,card,color,goal_amount,goal_date,start_month
+rent,Rent,spending,1400.00,first,Bills Card,#0072B2,,,
+utilities,Utilities,spending,180.00,second,Bills Card,#56B4E9,,,
+phone,Phone,spending,65.00,second,Bills Card,#999999,,,
+groceries,Groceries,spending,600.00,split,Everyday Card,#009E73,,,
+gas,Gas,spending,160.00,split,Everyday Card,#E69F00,,,
+dining,Dining Out,spending,150.00,split,Everyday Card,#D55E00,,,
+fun,Fun Money,spending,100.00,split,Debit,#CC79A7,,,
+trip,Beach Trip,sinking,200.00,split,Debit,#F0E442,1800.00,2027-06-01,2026-06
+car_repair,Car Repairs,sinking,75.00,split,Debit,#000000,1000.00,,2026-04
