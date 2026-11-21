@@ -40,3 +40,23 @@ all five on 2026-11-21 ("ok let's do what is left"). Each is easy to change.
 | C | When a sinking fund is "on pace" | Projected balance = current balance + the contributions still to come, counting months after the current month up to the month before the goal date's month. On pace means projected >= goal | A goal date of 2027-06-01 means the money is needed by June 1, so May is the last contribution. |
 | D | Withdrawals from a sinking fund | Spending logged against a sinking fund counts as a withdrawal; a negative amount puts money back | Same rule as refunds in decision 7. |
 | E | Sinking fund `half` value | Both funds carry `split` in the data, but no Stage 1 function uses it yet | Kept from the approved plan; it may matter for the Stage 4 month view. |
+
+## Stage 2: Envelope view
+
+Claude proposed the Stage 2 plan on 2026-11-21. Lindsey approved every
+recommendation the same day ("go with your recommendations").
+
+| # | Decision | Choice | Decided by | Date | Why |
+|---|---|---|---|---|---|
+| 15 | How envelope color is used | A stripe down the card's left edge, with the envelope's name always printed beside it | Lindsey | 2026-11-21 | Filling the card with color would fail text contrast for some palette colors, and the name means color is never the only identifier. |
+| 16 | The pale yellow stripe | Every stripe gets a thin dark outline; Beach Trip keeps #F0E442 | Lindsey | 2026-11-21 | #F0E442 nearly disappears against a white card without an edge. |
+| 17 | The headline number | Remaining, as "$80.01 left" or "Over by $49.85", with "Spent X of Y" beneath | Lindsey | 2026-11-21 | The question the view answers is how much is left. |
+| 18 | How overspending is marked | Three signals besides color: the words "Over by", a dark red "Over budget" badge with white text, and a full bar with diagonal stripes. Exactly at budget gets a neutral "At budget" badge; under budget gets no badge | Lindsey | 2026-11-21 | Overspending is never hidden (brief) and never shown by color alone (conventions). |
+| 19 | Cents | Shown everywhere, as in $1,400.00 | Lindsey | 2026-11-21 | The screen matches the data exactly. |
+| 20 | Sinking funds | A separate "Sinking Funds" section below the grid, showing saved, percent of goal, and "On pace" or "Behind pace" | Lindsey | 2026-11-21 | A fund that accumulates needs a different card from a monthly envelope. |
+| 21 | Month picker | Added in Stage 2 (September, October, November 2026), opening on the latest month | Lindsey | 2026-11-21 | November has no overspending, so without a picker no visitor would see the over-budget card. |
+| 22 | Order and grouping | Cards follow the envelope file's order, with the payment card named in small text on each | Lindsey | 2026-11-21 | Simple and predictable; grouping can be added later. |
+| 23 | Phone layout | One column on a phone, more on wider screens, from a minimum card width of about 280px | Lindsey | 2026-11-21 | The brief requires the layout to work on a phone. |
+| 24 | Look and font | Bootstrap 5 defaults through bslib, with the device's system font | Lindsey | 2026-11-21 | bslib comes with shiny, so nothing extra downloads; web fonts would slow the first Shinylive load. |
+| 25 | How the bar is drawn | Plain HTML and CSS, marked as decorative for screen readers, with the same facts in text | Lindsey | 2026-11-21 | A screen reader reads the text; a plotted bar would be invisible to it. |
+| 26 | Git | Branch `stage-2-envelope-view`, merged and pushed after review | Lindsey | 2026-11-21 | Same process as Stage 1 (decision 14). |

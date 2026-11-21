@@ -1,0 +1,135 @@
+/* styles.css: the envelope cards.
+   Text colors were chosen to meet WCAG AA contrast (4.5:1 or better) on white;
+   the ratio for each is noted beside it. */
+
+/* Page --------------------------------------------------------------------- */
+
+.env-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
+}
+
+.env-intro,
+.env-summary {
+  color: #495057;              /* 8.2:1 on white */
+}
+
+.env-page h2 {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+}
+
+/* Grid: one column on a phone, more as the screen widens (decision 23).
+   min(280px, 100%) lets a card shrink on a screen narrower than 280px
+   instead of overflowing it. */
+.env-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: 1rem;
+}
+
+/* Card --------------------------------------------------------------------- */
+
+.env-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #adb5bd;
+  border-radius: 0.5rem;
+  padding: 0.9rem 1rem 0.9rem 1.6rem;   /* extra left room for the stripe */
+}
+
+/* The color stripe (decision 15), with a thin dark outline so pale colors
+   such as #F0E442 still show an edge (decision 16). */
+.env-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0.6rem;
+  background: var(--env-color);
+  border-radius: 0.5rem 0 0 0.5rem;
+  box-shadow: inset 0 0 0 1px #212529;
+}
+
+.env-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.env-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.env-payment {
+  font-size: 0.85rem;
+  color: #595959;              /* 7.0:1 on white */
+}
+
+.env-card-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.4rem 0 0.5rem;
+}
+
+.env-headline {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.env-detail {
+  font-size: 0.9rem;
+  color: #495057;              /* 8.2:1 on white */
+  margin: 0.4rem 0 0;
+}
+
+/* Badges: white text on dark fills (decision 18). ------------------------- */
+
+.env-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.env-badge-over    { background: #9b1c1c; }   /* white text 8.2:1 */
+.env-badge-at      { background: #495057; }   /* white text 8.2:1 */
+.env-badge-on_pace { background: #1e6b3a; }   /* white text 6.5:1 */
+.env-badge-behind  { background: #8a4b00; }   /* white text 6.8:1 */
+
+/* Bar (decorative; decision 25) -------------------------------------------- */
+
+.env-bar {
+  height: 0.75rem;
+  background: #e9ecef;
+  border: 1px solid #6c757d;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.env-bar-fill {
+  height: 100%;
+  background: var(--env-color);
+  box-shadow: inset -1px 0 0 #212529;   /* marks where the fill ends */
+}
+
+/* Overspent: diagonal stripes, so the bar does not rely on color alone. */
+.env-bar-over {
+  background: repeating-linear-gradient(
+    45deg, #9b1c1c 0 6px, #f4c7c7 6px 12px
+  );
+}
