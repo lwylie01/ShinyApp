@@ -5,7 +5,7 @@ test_that("changing the month changes the cards", {
   shiny::testServer(
     envelopesServer,
     args = list(envelopes = fixture_envelopes(),
-                transactions = fixture_transactions()),
+                transactions = shiny::reactiveVal(fixture_transactions())),
     {
       # October: Phone is over budget.
       session$setInputs(month = "2026-10")
@@ -18,6 +18,27 @@ test_that("changing the month changes the cards", {
       expect_equal(output$summary, "November 2026: 0 of 3 envelopes over budget.")
       expect_false(grepl("Over by", output$spending_cards$html, fixed = TRUE))
       expect_match(output$sinking_cards$html, "$275.00 saved", fixed = TRUE)
+    }
+  )
+})
+
+test_that("the cards redraw when the transactions change", {
+  tx <- shiny::reactiveVal(fixture_transactions())
+  shiny::testServer(
+    envelopesServer,
+    args = list(envelopes = fixture_envelopes(), transactions = tx),
+    {
+      session$setInputs(month = "2026-11")
+      expect_match(output$spending_cards$html, "$197.01 left", fixed = TRUE)
+
+      # Add a 300.00 Food purchase in November: Food goes over budget.
+      extra <- fixture_transactions()[8, ]
+      extra$transaction_id <- "s001"
+      extra$amount_cents <- 30000
+      tx(rbind(tx(), extra))
+      session$flushReact()
+      expect_equal(output$summary, "November 2026: 1 of 3 envelopes over budget.")
+      expect_match(output$spending_cards$html, "Over by $102.99", fixed = TRUE)
     }
   )
 })

@@ -60,3 +60,24 @@ recommendation the same day ("go with your recommendations").
 | 24 | Look and font | Bootstrap 5 defaults through bslib, with the device's system font | Lindsey | 2026-11-21 | bslib comes with shiny, so nothing extra downloads; web fonts would slow the first Shinylive load. |
 | 25 | How the bar is drawn | Plain HTML and CSS, marked as decorative for screen readers, with the same facts in text | Lindsey | 2026-11-21 | A screen reader reads the text; a plotted bar would be invisible to it. |
 | 26 | Git | Branch `stage-2-envelope-view`, merged and pushed after review | Lindsey | 2026-11-21 | Same process as Stage 1 (decision 14). |
+
+Lindsey reviewed the running app on 2026-11-21 ("looks good to me for now"),
+and Stage 2 was merged and pushed.
+
+## Stage 3: Logging
+
+Claude proposed the Stage 3 plan on 2026-11-21. Lindsey approved every
+recommendation the same day ("go with your recommendations").
+
+| # | Decision | Choice | Decided by | Date | Why |
+|---|---|---|---|---|---|
+| 27 | Where the form sits | A card above the envelope grid | Lindsey | 2026-11-21 | Within reach on a phone, where a sidebar would collapse anyway. |
+| 28 | Refunds in the form | A Spending / Refund choice; the amount is always typed as a positive number | Lindsey | 2026-11-21 | A typed minus sign is easy to miss, especially on a phone. |
+| 29 | Amount field | A text box that brings up the number keypad and accepts "12.5", "12.50", or "$12.50"; fractions of a cent and zero are refused, as in the CSV | Lindsey | 2026-11-21 | Forgiving about format, strict about value. |
+| 30 | Date | Defaults to the latest date in the data (November 20, 2026); only September 1 to November 30, 2026 are allowed | Lindsey | 2026-11-21 | Every entry lands in a month the picker offers, consistent with decision 8. |
+| 31 | Sinking funds in the form | Allowed, with the envelope list grouped under "Spending" and "Sinking funds"; an entry there is a withdrawal | Lindsey | 2026-11-21 | Follows implementation detail D. |
+| 32 | After saving | A confirmation sentence naming the amount, envelope, and what is left, read aloud by screen readers; the month picker jumps to the entry's month; amount and note clear, envelope and date stay | Lindsey | 2026-11-21 | The result of an entry is visible at once, and repeated entries are quick. |
+| 33 | Undoing | A "Logged This Session" list with a Remove button on each entry, plus "Reset to demo data"; the demo's own transactions cannot be removed | Lindsey | 2026-11-21 | Mistakes are easy to fix without breaking the demo. |
+| 34 | Saving across reloads | Nothing is saved; entries vanish on reload, and a line under the form says so | Lindsey | 2026-11-21 | Keeps to rule 2: the app never holds a visitor's information. |
+| 35 | Notes | Optional, at most 100 characters, always shown as plain text | Lindsey | 2026-11-21 | A note can never inject anything into the page. |
+| 36 | Git | Branch `stage-3-logging`, merged and pushed after review | Lindsey | 2026-11-21 | Same process as decisions 14 and 26. |

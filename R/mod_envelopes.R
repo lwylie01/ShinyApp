@@ -41,22 +41,32 @@ envelopesUI <- function(id, months, selected) {
 
 
 # envelopesServer() ------------------------------------------------------------
-#   envelopes, transactions: the clean tables from read_envelopes() and
-#   read_transactions(). They do not change in Stage 2; Stage 3 will make
-#   transactions reactive so new entries appear on the cards.
-envelopesServer <- function(id, envelopes, transactions) {
+#   envelopes:    the clean table from read_envelopes()
+#   transactions: a reactive (the shared reactiveVal in app.R) returning the
+#                 current transactions, so entries from the logging form
+#                 appear on the cards as soon as they are saved
+#   jump_to:      optional reactive returning list(month, count) after each
+#                 save; the picker moves to that month (decision 32)
+envelopesServer <- function(id, envelopes, transactions, jump_to = NULL) {
   shiny::moduleServer(id, function(input, output, session) {
 
     # Step 1: the numbers for the chosen month. Each reactive() recalculates
-    # only when input$month changes.
+    # when input$month changes or a transaction is added or removed.
     balances <- shiny::reactive({
       shiny::req(input$month)
-      envelope_balances(envelopes, transactions, input$month)
+      envelope_balances(envelopes, transactions(), input$month)
     })
     funds <- shiny::reactive({
       shiny::req(input$month)
-      sinking_fund_progress(envelopes, transactions, input$month)
+      sinking_fund_progress(envelopes, transactions(), input$month)
     })
+
+    # Step 1b: after a save, show the month the entry landed in.
+    if (!is.null(jump_to)) {
+      shiny::observeEvent(jump_to(), {
+        shiny::updateSelectInput(session, "month", selected = jump_to()$month)
+      })
+    }
 
     # Step 2: the text above each section.
     output$summary <- shiny::renderText(budget_summary_text(balances()))
