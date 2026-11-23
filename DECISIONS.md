@@ -164,4 +164,16 @@ How to read these numbers:
 - Headless Chrome on a laptop without a graphics card is likely slower than
   an everyday browser, so the absolute times are probably pessimistic; the
   difference between the two columns is the useful comparison.
-- Decision pending: whether ggplot2 stays (decision 42).
+- Lindsey decided from these numbers that ggplot2 stays (decision 59).
+
+### Decided after the measurements
+
+| # | Decision | Choice | Decided by | Date | Why |
+|---|---|---|---|---|---|
+| 59 | ggplot2 | Stays for the trend figure, settling decision 42 | Lindsey | 2026-11-23 | Lindsey: "keep ggplot2". It adds 12.8 MB and about a second, against about 20 seconds that webR's start-up costs on every load anyway. |
+| 60 | Preview before publishing | Skipped: Lindsey's laptop would not open the local preview address, so the first review is of the live site, which Claude checks right after publishing | Lindsey | 2026-11-23 | Lindsey: "merge and publish because my laptop won't let me preview at that url". Decision 53 assumed the preview would open; the workflow's own build on the branch had already passed. |
+
+### Review notes
+
+Lindsey approved Stage 5 on 2026-11-23 ("keep ggplot2, merge and publish"),
+and it was merged into `main`, which published the site for the first time.
