@@ -18,6 +18,9 @@ demo_transactions <- read_transactions("data/demo_transactions.csv", envelopes)
 months     <- sort(unique(month_key(demo_transactions$date)))
 date_range <- month_bounds(months)
 
+# Where the source code lives, for the footer.
+REPO_URL <- "https://github.com/lwylie01/envelope-budget"
+
 # Step 3: the page: the logging form, the shared month picker, then two tabs
 # (decision 37). bs_theme() with the plain Bootstrap 5 preset uses each
 # device's own system font, so nothing extra downloads (decision 24).
@@ -41,6 +44,15 @@ ui <- page_fluid(
     navset_underline(
       nav_panel("Envelopes", envelopesUI("envelopes")),
       nav_panel("Month View", monthUI("month"))
+    ),
+    # Step 3b: the footer (decision 56). The links are styled in styles.css
+    # with an underline, so they do not rely on color to look like links.
+    tags$footer(
+      class = "env-footer",
+      p("Fictional data. Runs entirely in your browser; nothing is sent anywhere.",
+        a("Source code", href = REPO_URL), "and",
+        a("design log", href = paste0(REPO_URL, "/blob/main/DECISIONS.md")),
+        "on GitHub.")
     )
   )
 )

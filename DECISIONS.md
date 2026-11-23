@@ -102,3 +102,66 @@ recommendation the same day ("yes, please do the recs").
 | 44 | Where the line stops | At the latest date in the data for the latest month; earlier months run to their last day | Lindsey | 2026-11-23 | A flat line to the 30th would imply nothing more was spent. Consistent with decision 8. |
 | 45 | Refunds in the figure | Shown as a dip in the line | Lindsey | 2026-11-23 | Honest about what happened. |
 | 46 | Git | Branch `stage-4-month-view`, merged and pushed after review | Lindsey | 2026-11-23 | Same process as earlier stages. |
+
+Lindsey approved Stage 4 on 2026-11-23 ("looks good merge and pull"), and it
+was merged and pushed.
+
+### Open question
+
+- **Half-month carryover.** Each half of the month is judged on its own, so
+  October's Groceries reads "Over by $7.35" after the 15th although the
+  envelope finished the month $57.89 under. The alternative is to carry
+  leftover first-half money into the second half of the same month. This rule
+  came in with Stage 1 and was not put to Lindsey as its own question; raised
+  2026-11-23, not yet decided.
+
+## Stage 5: Deploy
+
+Claude proposed the Stage 5 plan on 2026-11-23. Lindsey approved every
+recommendation the same day ("ok").
+
+| # | Decision | Choice | Decided by | Date | Why |
+|---|---|---|---|---|---|
+| 47 | Folder structure | The app moves into `app/` (`app.R`, `R/`, `data/`, `www/`); only that folder is exported | Lindsey | 2026-11-23 | Shinylive bundles everything in the app's folder and scans it for packages; from the root it would have shipped the tests and made every visitor download testthat. |
+| 48 | How the site is built | A GitHub Actions workflow rebuilds and publishes on every push to `main`; built files are never committed | Lindsey | 2026-11-23 | The live site always matches `main` and cannot go stale. |
+| 49 | Tests before publishing | Every test runs in the workflow, and nothing is published unless all pass | Lindsey | 2026-11-23 | A broken change never goes live. |
+| 50 | The workflow file | A short, commented workflow of our own with pinned versions (shinylive 0.5.0), not Posit's prebuilt one | Lindsey | 2026-11-23 | Readable for a portfolio reader, and stable from one build to the next. |
+| 51 | Repository name | Renamed from `ShinyApp` to `envelope-budget`; the site is `lwylie01.github.io/envelope-budget/` | Lindsey | 2026-11-23 | A descriptive address. GitHub redirects the old one. |
+| 52 | Measuring load time | Two local builds, with and without the ggplot2 figure, timed on a cold and a warm load at normal speed and on simulated Fast 4G, with total download size; Lindsey decides from the numbers whether ggplot2 stays | Lindsey | 2026-11-23 | Decision 42 deferred the ggplot2 question to a measurement. |
+| 53 | Preview before publishing | The export is built and served locally for Lindsey to try before anything is public | Lindsey | 2026-11-23 | The browser-only version is reviewed before it goes live. |
+| 54 | Merging means publishing | Merging into `main` is the single publish step | Lindsey | 2026-11-23 | Every change to the live site passes through review. |
+| 55 | Turning on Pages | Claude turns it on with `gh`, with GitHub Actions as the source | Lindsey | 2026-11-23 | Approved as part of the plan. |
+| 56 | Page title and footer | The browser tab reads "Envelope Budget"; a footer reads "Fictional data. Runs entirely in your browser; nothing is sent anywhere. Source code and design log on GitHub." | Lindsey | 2026-11-23 | Says plainly what the page is and where its making is documented. |
+| 57 | Tracking | None: no analytics of any kind. The README will note that GitHub keeps standard server logs for Pages sites | Lindsey | 2026-11-23 | Keeps to rules 2 and 3. |
+| 58 | Git | Branch `stage-5-deploy`; merging it publishes the site for the first time | Lindsey | 2026-11-23 | Same process as earlier stages, with decision 54. |
+
+### Load-time measurements (decision 52), 2026-11-23
+
+Two exports with shinylive 0.5.0: the app as built, and a copy whose figure
+was drawn with base R graphics so that ggplot2 was not bundled. Each was
+served from a local web server on Lindsey's laptop and loaded in headless
+Chrome; "cold" is a brand-new browser profile with nothing cached, "warm" is
+a reload straight after. Times run until the first envelope card appears.
+
+| | With ggplot2 | Without ggplot2 |
+|---|---|---|
+| Packages bundled | 21 (ggplot2 alone is 7.3 MB) | 11 |
+| Downloaded on a first visit | 59.3 MB | 46.5 MB |
+| Cold load, median of 3 runs | 26.8 s | 25.8 s |
+| Warm reload, median of 3 runs | 23.1 s | 21.4 s |
+| Download alone at Fast 4G speed (9 Mbps), estimated | about 53 s | about 41 s |
+
+How to read these numbers:
+
+- Most of the weight is webR itself: R compiled to run in the browser. Even
+  without ggplot2, a first visit downloads 46.5 MB, and every load, cached or
+  not, spends about 20 seconds starting R. ggplot2 adds 12.8 MB (28 percent
+  more) and about a second of start-up on a fast connection.
+- Chrome's simulated Fast 4G did not slow the downloads, because webR fetches
+  its files from a background worker that the simulation does not reach. The
+  Fast 4G row is therefore an estimate (size x 8 / 9 Mbps), not a timing; a
+  real phone visit would take at least that long plus start-up.
+- Headless Chrome on a laptop without a graphics card is likely slower than
+  an everyday browser, so the absolute times are probably pessimistic; the
+  difference between the two columns is the useful comparison.
+- Decision pending: whether ggplot2 stays (decision 42).

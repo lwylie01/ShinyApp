@@ -1,0 +1,78 @@
+# deploy.yml
+# Tests the app, exports it with Shinylive, and publishes it to GitHub Pages.
+#
+# On every push to any branch: install R, run the tests, and export the app,
+# so a branch shows whether it would build before it is merged.
+# On a push to main only: also publish the export to GitHub Pages. Merging to
+# main is therefore the single step that publishes the live site
+# (decision 54), and nothing is published unless every test passes
+# (decision 49).
+
+name: Test and deploy
+
+on:
+  push:
+  workflow_dispatch:      # allows a manual rerun from the Actions tab
+
+# The minimum permissions: read the code, and write to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two publishes at once; let a running one finish.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: get the code.
+      - uses: actions/checkout@v4
+
+      # Step 2: install R. The public Posit package manager serves prebuilt
+      # Linux packages, which install in seconds instead of minutes.
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      # Step 3: install exactly the packages the app and tests use, with
+      # shinylive pinned so the export does not change under us (decision 50).
+      - name: Install R packages
+        run: |
+          install.packages("pak")
+          pak::pkg_install(c("shiny", "bslib", "dplyr", "ggplot2",
+                             "testthat", "shinylive@0.5.0"))
+        shell: Rscript {0}
+
+      # Step 4: run every test. A failure stops the workflow here, before
+      # anything is exported or published.
+      - name: Run tests
+        run: Rscript tests/testthat.R
+
+      # Step 5: export only the app/ folder to a static site (decision 47).
+      - name: Export with Shinylive
+        run: |
+          shinylive::export("app", "site",
+                            template_params = list(title = "Envelope Budget"))
+        shell: Rscript {0}
+
+      # Step 6: on main, hand the site to GitHub Pages.
+      - if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    # Publish only from main, and only after the build job succeeded.
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -3,10 +3,10 @@
 # these tests say so.
 
 demo_envelopes <- function() {
-  read_envelopes(testthat::test_path("..", "..", "data", "demo_envelopes.csv"))
+  read_envelopes(testthat::test_path("..", "..", "app", "data", "demo_envelopes.csv"))
 }
 demo_transactions <- function() {
-  read_transactions(testthat::test_path("..", "..", "data",
+  read_transactions(testthat::test_path("..", "..", "app", "data",
                                         "demo_transactions.csv"),
                     demo_envelopes())
 }

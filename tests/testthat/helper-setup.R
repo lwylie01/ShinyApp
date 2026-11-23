@@ -1,9 +1,10 @@
 # testthat runs files named helper-*.R before the tests.
 #
-# Step 1: load the app's logic. This project is not an R package (decision 10),
-# so the functions under R/ are sourced here, the same way Shiny sources R/
-# when the app starts.
-for (f in list.files(testthat::test_path("..", "..", "R"),
+# Step 1: load the app's logic from app/R. This project is not an R package
+# (decision 10), so the functions are sourced here, the same way Shiny
+# sources app/R/ when the app starts. The tests live outside app/ so that the
+# Shinylive export, which bundles everything in app/, never includes them.
+for (f in list.files(testthat::test_path("..", "..", "app", "R"),
                      pattern = "\\.R$", full.names = TRUE)) {
   source(f, local = FALSE)
 }

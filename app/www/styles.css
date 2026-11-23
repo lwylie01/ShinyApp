@@ -253,3 +253,25 @@
   color: #212529;
   font-size: 0.95rem;
 }
+
+/* Footer (Stage 5) ---------------------------------------------------------- */
+
+.env-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #dee2e6;
+  font-size: 0.9rem;
+  color: #495057;              /* 8.2:1 on white */
+}
+
+/* Links: a dark blue plus an underline, so a link is marked
+   by more than color. Hover and focus darken it. */
+.env-footer a {
+  color: #1d4f8f;              /* 8.2:1 on white */
+  text-decoration: underline;
+}
+
+.env-footer a:hover,
+.env-footer a:focus {
+  color: #212529;
+}
