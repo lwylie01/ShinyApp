@@ -194,3 +194,62 @@
   white-space: nowrap;
   overflow-wrap: normal;
 }
+
+/* Month picker and tabs (Stage 4) ------------------------------------------ */
+
+.env-picker {
+  margin-top: 1.5rem;
+}
+
+.env-page .nav {
+  margin-bottom: 0.5rem;
+}
+
+/* Half-month summary boxes: side by side, stacked on a narrow phone. */
+.env-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.env-tile {
+  border: 1px solid #adb5bd;
+  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+}
+
+.env-tile-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+}
+
+.env-tile-line {
+  color: #495057;              /* 8.2:1 on white */
+  margin: 0;
+}
+
+.env-tile-big {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0.1rem 0;
+}
+
+/* Overspending: words first, dark red second (decision 39). */
+.env-tile-over,
+.env-over-text {
+  color: #9b1c1c;              /* 8.2:1 on white */
+  font-weight: 700;
+  margin: 0;
+}
+
+.env-half-table caption {
+  caption-side: top;
+  color: #495057;
+}
+
+.env-figure-text {
+  color: #212529;
+  font-size: 0.95rem;
+}

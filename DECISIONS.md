@@ -81,3 +81,24 @@ recommendation the same day ("go with your recommendations").
 | 34 | Saving across reloads | Nothing is saved; entries vanish on reload, and a line under the form says so | Lindsey | 2026-11-21 | Keeps to rule 2: the app never holds a visitor's information. |
 | 35 | Notes | Optional, at most 100 characters, always shown as plain text | Lindsey | 2026-11-21 | A note can never inject anything into the page. |
 | 36 | Git | Branch `stage-3-logging`, merged and pushed after review | Lindsey | 2026-11-21 | Same process as decisions 14 and 26. |
+
+Lindsey approved Stage 3 on 2026-11-23 ("merge and push"), and it was merged
+and pushed.
+
+## Stage 4: Month view
+
+Claude proposed the Stage 4 plan on 2026-11-23. Lindsey approved every
+recommendation the same day ("yes, please do the recs").
+
+| # | Decision | Choice | Decided by | Date | Why |
+|---|---|---|---|---|---|
+| 37 | Layout | Two tabs, "Envelopes" and "Month View", under one shared month picker; the logging form sits above both | Lindsey | 2026-11-23 | Both views always show the same month, and the page stays short on a phone. |
+| 38 | Half-month totals | Two summaries at the top of the month view: planned and spent before the 15th, and from the 15th on | Lindsey | 2026-11-23 | Answers the planning question at a glance. |
+| 39 | Half-month table | An HTML table with a caption, one row per spending envelope; cells read "$31.25 of $75.00", "Over by" is spelled out, and a half with nothing planned or spent reads "Not planned"; sinking funds stay out (detail A) | Lindsey | 2026-11-23 | A real table is read correctly by screen readers. |
+| 40 | Trend figure | The month's spending pace: cumulative spending by day for all spending envelopes, against a dashed step line of money planned so far that steps up on the 1st and the 15th | Lindsey | 2026-11-23 | Three months of data would make a month-by-month trend only three points; the pace ties the figure to the 15th split. |
+| 41 | One envelope at a time | Not now; the figure shows all spending envelopes together | Lindsey | 2026-11-23 | Kept simple; a selector can come later. |
+| 42 | ggplot2 | Used for the trend figure, following the project conventions, which supersedes decision 9 for this one package; the load cost is measured in Stage 5, with a hand-drawn HTML/SVG figure as the fallback | Lindsey | 2026-11-23 | The conventions call for ggplot2, and the cost is better measured than guessed. |
+| 43 | Figure accessibility | Alt text generated from the numbers, the same sentence printed below the figure, and lines told apart by solid versus dashed and by direct labels, never color alone; the 15th is a labeled dotted line | Lindsey | 2026-11-23 | A plot is a picture; the facts must also exist as text. |
+| 44 | Where the line stops | At the latest date in the data for the latest month; earlier months run to their last day | Lindsey | 2026-11-23 | A flat line to the 30th would imply nothing more was spent. Consistent with decision 8. |
+| 45 | Refunds in the figure | Shown as a dip in the line | Lindsey | 2026-11-23 | Honest about what happened. |
+| 46 | Git | Branch `stage-4-month-view`, merged and pushed after review | Lindsey | 2026-11-23 | Same process as earlier stages. |

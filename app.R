@@ -18,7 +18,8 @@ demo_transactions <- read_transactions("data/demo_transactions.csv", envelopes)
 months     <- sort(unique(month_key(demo_transactions$date)))
 date_range <- month_bounds(months)
 
-# Step 3: the page. bs_theme() with the plain Bootstrap 5 preset uses each
+# Step 3: the page: the logging form, the shared month picker, then two tabs
+# (decision 37). bs_theme() with the plain Bootstrap 5 preset uses each
 # device's own system font, so nothing extra downloads (decision 24).
 ui <- page_fluid(
   theme = bs_theme(version = 5, preset = "bootstrap"),
@@ -34,19 +35,26 @@ ui <- page_fluid(
     loggingUI("logging", envelopes,
               default_date = max(demo_transactions$date),
               date_range = date_range),
-    envelopesUI("envelopes", months = months,
-                selected = latest_month(demo_transactions))
+    div(class = "env-picker",
+        monthPickerUI("picker", months = months,
+                      selected = latest_month(demo_transactions))),
+    navset_underline(
+      nav_panel("Envelopes", envelopesUI("envelopes")),
+      nav_panel("Month View", monthUI("month"))
+    )
   )
 )
 
 # Step 4: the server. Each visitor gets their own copy of the transactions,
-# held only for this visit (decision 34). Both modules share it: the logging
-# form changes it, and the envelope cards redraw from it.
+# held only for this visit (decision 34). The logging form changes it; the
+# picker follows each save to its month; both tabs redraw from it.
 server <- function(input, output, session) {
   transactions <- reactiveVal(demo_transactions)
   saved_month  <- loggingServer("logging", envelopes, transactions,
                                 demo_transactions, date_range)
-  envelopesServer("envelopes", envelopes, transactions, jump_to = saved_month)
+  month        <- monthPickerServer("picker", jump_to = saved_month)
+  envelopesServer("envelopes", envelopes, transactions, month)
+  monthServer("month", envelopes, transactions, month)
 }
 
 shinyApp(ui, server)
